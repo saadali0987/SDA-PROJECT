@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ProfileButton from "./ProfileButton";
+import SearchBar from "./Searchbar";
 
 function Header() {
   const user = useUserData((state) => state.user);
@@ -32,72 +33,46 @@ function Header() {
   };
 
   return (
-    <div className="w-full fixed top-0 left-0 px-3 py-2 bg-main-color flex items-center justify-between z-50 border-gray-700/50 border-b-[1px]">
-      {/* logo and name */}
-      <div className="flex items-center space-x-2 w-[15rem]">
-        <Image
-          alt="logo"
-          width={38}
-          height={38}
-          src="/logo.png"
-          className="w-auto h-auto"
-        />
-        <Link href="/" className=" text-lg">
-          FASTLink
-        </Link>
-      </div>
-
-      {/* searchbar */}
-      {/* <div className="w-full flex items-center justify-center">
-        <div className=" w-2/4 flex items-center bg-[#576970] space-x-2 rounded-md p-1 md:mr-56 ">
-          <SearchIcon className="w-4 h-4" />
-          <input
-            placeholder="Search FASTLink"
-            className="w-full bg-[#576970] focus:outline-none text-sm"
+    <div className="w-full fixed top-0 left-0 z-50 bg-main-color border-gray-700/50 border-b-[1px]">
+      <div className="mx-auto max-w-[1200px] px-3 py-2 bg-main-color flex items-center justify-between  ">
+        <div className="flex items-center space-x-2 w-[15rem]">
+          <Image
+            alt="logo"
+            width={38}
+            height={38}
+            src="/logo.png"
+            className="w-auto h-auto"
           />
-        </div>
-      </div> */}
-
-      {/* icons */}
-
-      {user.username ? (
-        <div className="flex items-center justify-end space-x-2 text-sm  w-[15rem]">
-          <button
-            onClick={handleCreatePost}
-            className="flex items-center space-x-1"
-          >
-            <PlusIcon className="w-5 h-5" />
-            <span>Create</span>
-          </button>
-          {/* <button
-            onClick={handleLogout}
-            className="px-2 cursor-pointer  hover:opacity-50"
-          >
-            Logout
-          </button> */}
-          {/* <Button >Secondary</Button> */}
-          {/* <Button variant="secondary">{user.username}</Button> */}
-          <ProfileButton />
-        </div>
-      ) : (
-        <div className="flex items-center space-x-2 text-sm">
-          <Button>
-            <Link
-              href="/login"
-              // className="px-2 cursor-pointer  hover:opacity-50"
-            >
-              Login
-            </Link>
-          </Button>
-
-          <Link
-            href="/signup"
-            className="px-2 cursor-pointer  hover:opacity-50 border p-1 rounded-md text-green-200"
-          >
-            Register
+          <Link href="/" className=" text-lg">
+            FASTLink
           </Link>
         </div>
-      )}
+
+        <SearchBar />
+
+        {user.username ? (
+          <div className="flex items-center justify-end space-x-2 text-sm  w-[15rem]">
+            <button
+              onClick={handleCreatePost}
+              className="flex items-center space-x-1"
+            >
+              <PlusIcon className="w-5 h-5" />
+              <span>Create</span>
+            </button>
+            <ProfileButton />
+          </div>
+        ) : (
+          <div className="flex items-center space-x-2 text-sm">
+            <Button>
+              <Link href="/login">Login</Link>
+            </Button>
+
+            <Button>
+              <Link href="/signup">Register</Link>
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

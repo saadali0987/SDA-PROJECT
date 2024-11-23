@@ -1,22 +1,17 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Settings, User } from "lucide-react";
 import { useUserData } from "@/store";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 
 function ProfileButton() {
   const user = useUserData((state) => state.user);
@@ -42,7 +37,16 @@ function ProfileButton() {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel className="cursor-pointer">
+          <Link href={`/${user.username}/profile`} className="flex gap-2">
+            <User className="h-5" /> My Account
+          </Link>
+        </DropdownMenuLabel>
+        <DropdownMenuLabel className="cursor-pointer">
+          <Link href={`/${user.username}/profile`} className="flex  items-center gap-2">
+            <Settings className="h-4" /> Settings
+          </Link>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
           Log out

@@ -26,82 +26,35 @@ const data = {
       url: "#",
       items: [
         {
-          title: "Installation",
+          title: "Home",
           url: "#",
         },
         {
-          title: "Project Structure",
+          title: "Create Post",
           url: "#",
         },
       ],
     },
-    // {
-    //   title: "Building Your Application",
-    //   url: "#",
-    //   items: [
-    //     {
-    //       title: "Routing",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Data Fetching",
-    //       url: "#",
-    //       isActive: true,
-    //     },
-    //     {
-    //       title: "Rendering",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Caching",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Styling",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Optimizing",
-    //       url: "#",
-    //     },
-    //     {
-    //       title: "Configuring",
-    //       url: "#",
-    //     },
-    //   ],
-    // },
     {
-      title: "API Reference",
+      title: "Communities",
       url: "#",
       items: [
         {
-          title: "Components",
+          title: "Study Guide",
           url: "#",
         },
         {
-          title: "File Conventions",
+          title: "Car Pool",
           url: "#",
         },
         {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
+          title: "Blood Donation",
           url: "#",
         },
       ],
     },
     {
-      title: "Community",
+      title: "More",
       url: "#",
       items: [
         {
@@ -152,7 +105,6 @@ export function AppSidebar({ ...props }) {
           </Collapsible>
         ))}
       </SidebarContent>
-      {/* <SidebarRail /> */}
     </Sidebar>
   );
 }
