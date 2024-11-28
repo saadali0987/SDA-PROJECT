@@ -24,7 +24,6 @@ function Login() {
     })
   }
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -46,17 +45,12 @@ function Login() {
           email: data.email
         })
 
-
         // Save the access token to localStorage
         localStorage.setItem('accessToken', data.access);  // Store access token
         localStorage.setItem('refreshToken', data.refresh);  // Store refresh token
         router.push("/")
-
-
       } else {
-
-        console.error('Loginup failed');
-        // Handle failure
+        console.error('Login failed');
       }
     } catch (error) {
       console.error('An error occurred:', error);
@@ -96,6 +90,15 @@ function Login() {
               👁️
             </button>
           </div>
+          <div className="mt-2">
+            <button
+              type="button"
+              className="text-sm text-blue-500 hover:underline"
+              onClick={() => router.push('/forgot-password')}
+            >
+              Forgot Password?
+            </button>
+          </div>
         </div>
         <Button
           type="submit"
@@ -106,7 +109,6 @@ function Login() {
         </Button>
       </Card>
       <div className='w-full h-screen '>
-
       </div>
     </div>
   )
