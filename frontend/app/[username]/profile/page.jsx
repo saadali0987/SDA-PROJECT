@@ -21,6 +21,8 @@ import { useState } from "react";
 export default function profile() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
+  const [newPassword, setNewPassowrd] = useState('')
+  const [currentPassword, setCurrentPassword] = useState('')
   const user = useUserData((state) => state.user);
   const setUser = useUserData((state) => state.setUser)
 
@@ -113,6 +115,51 @@ export default function profile() {
     }
   }
 
+  const changePassword = async (e)=>{
+    e.preventDefault()
+    if (!newPassword.trim()) {
+      alert("password cannot be empty.");
+      return;
+    }
+
+  
+    try {
+      const token = localStorage.getItem('accessToken')
+      const response = await fetch("http://localhost:8000/api/updateProfile/password/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          old_password: currentPassword,
+          new_password: newPassword
+         }),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to update password");
+      }
+  
+      const data = await response.json();
+      console.log(data)
+      
+      // Assuming `useUserData` has an update function
+      // useUserData.setState((state) => ({
+      //   user: { ...state.user, username: data.username },
+      // }));
+
+
+  
+      alert("Password updated successfully!");
+    } catch (error) {
+      console.error("Error password:", error);
+      alert(error.message || "Something went wrong. Please try again.");
+    }
+
+  }
+
   return (
     <DefaultLayout>
       <div className="relative w-full min-h-screen  mt-10 px-5 flex flex-col space-y-6">
@@ -186,7 +233,48 @@ export default function profile() {
               </div>
             </div>
             <div className="text-sm font-bold cursor-pointer">
-              Change Password?
+              
+              <Dialog>
+                  <DialogTrigger asChild>
+                    <button>Change Password?</button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>Change Password</DialogTitle>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                          Current Password
+                        </Label>
+                        <Input
+                        value={currentPassword}
+                          onChange={(e)=>setCurrentPassword(e.target.value)}
+                          id="currentPassword"
+                          defaultValue="Pedro Duarte"
+                          className="col-span-3"
+                          type='password'
+                        />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                          New Password
+                        </Label>
+                        <Input
+                        value={newPassword}
+                          onChange={(e)=>setNewPassowrd(e.target.value)}
+                          id="newPassword"
+                          defaultValue="Pedro Duarte"
+                          className="col-span-3"
+                          type='password'
+                        />
+                      </div>
+                    </div>
+                    <DialogFooter>
+                      <Button onClick={changePassword} type="submit">Save changes</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
             </div>
           </div>
         </div>
