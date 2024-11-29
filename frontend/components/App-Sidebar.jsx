@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { ChevronRight } from "lucide-react";
 import {
@@ -21,20 +22,7 @@ import {
 const data = {
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "Home",
-          url: "#",
-        },
-        {
-          title: "Create Post",
-          url: "#",
-        },
-      ],
-    },
+    
     {
       title: "Communities",
       url: "#",
@@ -50,16 +38,6 @@ const data = {
         {
           title: "Blood Donation",
           url: "/bloodDonationCommunity",
-        },
-      ],
-    },
-    {
-      title: "More",
-      url: "#",
-      items: [
-        {
-          title: "Contribution Guide",
-          url: "#",
         },
       ],
     },
