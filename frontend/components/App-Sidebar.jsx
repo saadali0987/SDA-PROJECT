@@ -41,7 +41,7 @@ const data = {
       items: [
         {
           title: "Study Guide",
-          url: "#",
+          url: "/studyCommunity",
         },
         {
           title: "Car Pool",
@@ -49,7 +49,7 @@ const data = {
         },
         {
           title: "Blood Donation",
-          url: "#",
+          url: "/bloodDonationCommunity",
         },
       ],
     },
