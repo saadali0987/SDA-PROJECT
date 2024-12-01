@@ -114,6 +114,7 @@ function CarPool({ community }) {
                 type="datetime-local"
                 value={formData.pickup_time}
                 onChange={handleInputChange}
+                min={new Date().toISOString().slice(0, 16)} // Set min attribute dynamically
                 className="w-full bg-gray-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>

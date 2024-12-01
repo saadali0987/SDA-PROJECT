@@ -71,8 +71,8 @@ function Signup() {
   }
 
   return (
-    <div className=' min-h-screen flex items-center justify-center pb-14 overflow-y-scroll no-scrollbar'>
-      <div className="bg-[#242623] rounded-lg shadow-lg p-8 border-2 w-1/2">
+    <div className=' min-h-screen flex items-center justify-center py-20 overflow-y-scroll no-scrollbar'>
+      <div className="bg-black-900 rounded-lg shadow-lg p-8 border-2 w-1/2">
         <h2 className="text-white text-3xl font-bold text-center">Create An Account</h2>
         <form className="space-y-6 mt-6">
           <div>

@@ -67,7 +67,7 @@ function DisplayComment({ comment, postId }) {
   return (
     <div className="mb-2">
       <Card className="w-full bg-sub-color my-2 p-2 flex items-center justify-start gap-3">
-        {/* Display the user's profile image if available */}
+       
         <Avatar>
           {userDetails?.profile_image ? (
             <AvatarImage src={userDetails.profile_image} alt={userDetails.username} />

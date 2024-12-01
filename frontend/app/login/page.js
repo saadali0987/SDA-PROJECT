@@ -58,8 +58,8 @@ function Login() {
   };
 
   return (
-    <div className='flex items-center justify-between gap-10'>
-      <Card className="space-y-6 mt-20 overflow-hidden w-1/2 p-5">
+    <div className="flex items-center justify-center min-h-screen bg-black-900">
+      <Card className="space-y-6 w-1/3 p-5">
         <h2 className="text-white text-3xl font-bold text-center">Welcome Back!</h2>
         <div>
           <Label htmlFor="email">Email</Label>
@@ -108,8 +108,6 @@ function Login() {
           Login
         </Button>
       </Card>
-      <div className='w-full h-screen '>
-      </div>
     </div>
   )
 }

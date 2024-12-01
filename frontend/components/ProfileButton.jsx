@@ -42,11 +42,7 @@ function ProfileButton() {
             <User className="h-5" /> My Account
           </Link>
         </DropdownMenuLabel>
-        <DropdownMenuLabel className="cursor-pointer">
-          <Link href={`/${user.username}/profile`} className="flex  items-center gap-2">
-            <Settings className="h-4" /> Settings
-          </Link>
-        </DropdownMenuLabel>
+        
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
           Log out

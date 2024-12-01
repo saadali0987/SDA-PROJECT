@@ -127,15 +127,6 @@ function StudyGuide({ community }) { // Accept community as a prop
               onChange={handleInputChange}
             />
           </div>
-          <div className="space-y-1">
-            <Label htmlFor="questionimage">Upload Image</Label>
-            <Input
-              id="questionimage"
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-          </div>
         </CardContent>
         <CustomCardFooter buttontext="Ask Now" />
       </form>
