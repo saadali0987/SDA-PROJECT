@@ -1,6 +1,5 @@
 "use client";
 import DefaultLayout from "@/components/DefaultLayout";
-import DisplayPosts from "@/components/DisplayPosts";
 import { useUserData } from "@/store";
 import { Edit2Icon, EditIcon } from "lucide-react";
 import {
@@ -16,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-
+import UserPostsList from "@/components/UserPostsDisplay";
 
 export default function profile() {
   const [username, setUsername] = useState('')
@@ -282,6 +281,9 @@ export default function profile() {
         <hr />
 
         <div className="flex-1">User Posts</div>
+        <div>
+          <UserPostsList/>
+        </div>
       </div>
     </DefaultLayout>
   );

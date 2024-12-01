@@ -28,11 +28,11 @@ const data = {
       items: [
         {
           title: "Home",
-          url: "#",
+          url: "/",
         },
         {
-          title: "Create Post",
-          url: "#",
+          title: "Study Materials",
+          url: "/studyMaterial",
         },
       ],
     },

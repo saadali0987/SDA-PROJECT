@@ -628,3 +628,24 @@ class UserDetailView(APIView):
         
 
 
+class UserPostsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user = request.user  # Get the authenticated user
+        
+        # Fetch posts by the user with their associated community (assuming your Post model has a foreign key to Community)
+        study_posts = StudyPost.objects.filter(user=user).select_related('community')
+        blood_donation_posts = BloodDonationPost.objects.filter(user=user).select_related('community')
+        carpool_posts = CarpoolPost.objects.filter(user=user).select_related('community')
+
+        # Serialize the posts
+        study_posts_serialized = StudyPostSerializer(study_posts, many=True).data
+        blood_donation_posts_serialized = BloodDonationPostSerializer(blood_donation_posts, many=True).data
+        carpool_posts_serialized = CarpoolPostSerializer(carpool_posts, many=True).data
+
+        # Combine all posts into a single list
+        all_posts = study_posts_serialized + blood_donation_posts_serialized + carpool_posts_serialized
+
+        # Return the combined posts
+        return Response(all_posts, status=status.HTTP_200_OK)
