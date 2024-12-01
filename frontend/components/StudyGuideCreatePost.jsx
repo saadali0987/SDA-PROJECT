@@ -8,7 +8,7 @@ import CustomCardHeader from "./CustomCardHeader";
 import CustomCardFooter from "./CustomCardFooter";
 import { useRouter } from 'next/navigation';
 
-function StudyGuide({ community }) { // Accept community as a prop
+function StudyGuide({ community }) { 
   const [formData, setFormData] = useState({
     studytitle: "",
     studyquestion: "",
@@ -50,12 +50,12 @@ function StudyGuide({ community }) { // Accept community as a prop
     if (formData.questionimage) {
       formDataToSend.append("questionimage", formData.questionimage);
     }
-    formDataToSend.append("community", community); // Add the community to the request
+    formDataToSend.append("community", community); 
 
-      // Example: Sending formDataToSend to the backend
+      
       const token = localStorage.getItem('accessToken');
       console.log(token)
-      // Perform the fetch with FormData
+      
       fetch('http://localhost:8000/api/createStudyPost', {
         method: "POST",
         headers: {

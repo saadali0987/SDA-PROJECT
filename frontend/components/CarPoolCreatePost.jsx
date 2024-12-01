@@ -17,7 +17,7 @@ function CarPool({ community }) {
   });
   const router = useRouter();
   const [successMessage, setSuccessMessage] = useState("");
-  // Handle input changes
+  
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
@@ -38,10 +38,10 @@ function CarPool({ community }) {
     formDataToSend.append("dropoff_point", formData.dropoff_point);
     formDataToSend.append("pickup_time", formData.pickup_time);
     formDataToSend.append("preferred_gender", formData.preferred_gender);
-    formDataToSend.append("capacity", formData.capacity); // Include capacity
+    formDataToSend.append("capacity", formData.capacity); 
     formDataToSend.append("community", community);
 
-    // Get the token from localStorage
+    
     const token = localStorage.getItem("accessToken");
     console.log(token);
 
@@ -49,14 +49,14 @@ function CarPool({ community }) {
     fetch("http://localhost:8000/api/createCarpoolPost", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`, // Include the token in the header
+        Authorization: `Bearer ${token}`, 
       },
-      body: formDataToSend, // Send FormData directly as the body
+      body: formDataToSend, 
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        setSuccessMessage("Posted Successfully!"); // Set success message
+        setSuccessMessage("Posted Successfully!"); 
         // Reset form after successful submission
         setFormData({
           pickup_point: "",
@@ -114,7 +114,7 @@ function CarPool({ community }) {
                 type="datetime-local"
                 value={formData.pickup_time}
                 onChange={handleInputChange}
-                min={new Date().toISOString().slice(0, 16)} // Set min attribute dynamically
+                min={new Date().toISOString().slice(0, 16)} 
                 className="w-full bg-gray-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>

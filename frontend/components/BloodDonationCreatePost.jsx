@@ -8,9 +8,9 @@ import { useRouter } from 'next/navigation';
 
 function BloodDonation({ community }) {
   const [formData, setFormData] = useState({
-    bloodType: "A+", // Default value
-    urgency: "Low", // Default value
-    requiredWithin: "1", // Default value (1 week)
+    bloodType: "A+", 
+    urgency: "Low", 
+    requiredWithin: "1", 
   });
   const router = useRouter();
   const [successMessage, setSuccessMessage] = useState("");
@@ -44,15 +44,15 @@ function BloodDonation({ community }) {
     fetch("http://localhost:8000/api/createBloodDonationPost", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`, // Include the token in the header
+        Authorization: `Bearer ${token}`, 
       },
-      body: formDataToSend, // Send FormData directly as the body
+      body: formDataToSend, 
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        setSuccessMessage("Posted Successfully!"); // Set success message
-        // Reset form after successful submission
+        setSuccessMessage("Posted Successfully!");
+        
         setFormData({
           bloodType: "A+",
           urgency: "Low",

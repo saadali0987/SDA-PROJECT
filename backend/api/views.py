@@ -47,7 +47,7 @@ class BaseCreatePostView(APIView):
                         status=status.HTTP_400_BAD_REQUEST,
                     )
 
-            # Get the community object
+            
             community_name = request.data.get("community")
             try:
                 community = Community.objects.get(name=community_name)
@@ -65,9 +65,9 @@ class BaseCreatePostView(APIView):
                 for field, source in self.post_data_mapping.items()
             }
             post_data.update({
-                "user": user.id,  # Add user ID
-                "community": community.community_id,  # Add community ID
-                "created_at": timezone.now(),  # Add timestamp
+                "user": user.id,  
+                "community": community.community_id,  
+                "created_at": timezone.now(),  
             })
 
             # Serialize and validate the data
@@ -154,7 +154,7 @@ class LatestPostsView(APIView):
             reverse=True
         )[:5]
 
-        # If no posts exist, return a message
+        
         if not all_posts:
             return Response(
                 {"message": "No posts available at the moment."},
@@ -242,11 +242,11 @@ class CreateComment(APIView):
 
     def post(self, request):
         try:
-            # Extract data from the request
+           
             
             data = request.data.copy()
-            data['user'] = request.user.id  # Add the authenticated user to the data
-            serializer = CommentSerializer(data=data)  # Pass the data to the serializer
+            data['user'] = request.user.id  
+            serializer = CommentSerializer(data=data)  
             
             if serializer.is_valid():
                 serializer.save()  # Save the valid comment
@@ -369,7 +369,7 @@ class CheckLikeStatus(APIView):
     
 
 class ToggleLike(APIView):
-    permission_classes = [IsAuthenticated]  # Ensure only authenticated users can like posts
+    permission_classes = [IsAuthenticated]  
 
     def post(self, request, *args, **kwargs):
         try:
@@ -386,7 +386,7 @@ class ToggleLike(APIView):
                 Like.objects.create(post_id=post, user_id=request.user)
                 action = "liked"
 
-            # Get the updated like count
+            
             updated_like_count = Like.objects.filter(post_id=post).count()
 
             return Response({
@@ -401,13 +401,13 @@ class ToggleLike(APIView):
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 class UserDetailView(APIView):
-    permission_classes = [IsAuthenticated]  # Ensure the user is authenticated
+    permission_classes = [IsAuthenticated]  
 
     def get(self, request, *args, **kwargs):
-        user_email = request.user.email  # Use the authenticated user's email
+        user_email = request.user.email  
         try:
             user = User.objects.get(email=user_email)
-            serializer = UserSerializer(user)  # Use the serializer to serialize user data
+            serializer = UserSerializer(user)  
             return Response(serializer.data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response(
@@ -567,7 +567,7 @@ class PasswordResetRequestView(APIView):
         send_mail(
             "Password Reset Request",  # Subject
             f"Click the link below to reset your password:\n\n{reset_url}",  # Email body
-            settings.DEFAULT_FROM_EMAIL,  # From email (using the setting from your settings.py)
+            settings.DEFAULT_FROM_EMAIL,  # From email 
             [email],  # To email address
         )
 
@@ -612,17 +612,17 @@ class UserDetailView(APIView):
             # Fetch user by user_id
             user = User.objects.get(id=user_id)
             
-            # Prepare the response data
+            
             data = {
                 "username": user.username,
                 "email": user.email
             }
             
-            # Return the response with user details
+            
             return Response(data, status=status.HTTP_200_OK)
         
         except User.DoesNotExist:
-            # Return error if user not found
+            
             return Response({"detail": "User not found."}, status=status.HTTP_404_NOT_FOUND)
       
         
@@ -632,20 +632,20 @@ class UserPostsView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        user = request.user  # Get the authenticated user
+        user = request.user  
         
-        # Fetch posts by the user with their associated community (assuming your Post model has a foreign key to Community)
+        # Fetch posts by the user with their associated community
         study_posts = StudyPost.objects.filter(user=user).select_related('community')
         blood_donation_posts = BloodDonationPost.objects.filter(user=user).select_related('community')
         carpool_posts = CarpoolPost.objects.filter(user=user).select_related('community')
 
-        # Serialize the posts
+       
         study_posts_serialized = StudyPostSerializer(study_posts, many=True).data
         blood_donation_posts_serialized = BloodDonationPostSerializer(blood_donation_posts, many=True).data
         carpool_posts_serialized = CarpoolPostSerializer(carpool_posts, many=True).data
 
-        # Combine all posts into a single list
+        
         all_posts = study_posts_serialized + blood_donation_posts_serialized + carpool_posts_serialized
 
-        # Return the combined posts
+       
         return Response(all_posts, status=status.HTTP_200_OK)
